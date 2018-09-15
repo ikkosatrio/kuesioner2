@@ -176,17 +176,32 @@ Dashboard - Administrasi
 												<br>
 												<select required="true" name="jenis" class="form-control">
 													<option value="">=Pilih Jenis=</option>
-													<option value="positif">POSITIF</option>
-													<option value="negatif">NEGATIF</option>
+													<option value="APO1">APO1</option>
+													<option value="APO2">APO2</option>
+													<option value="APO3">APO3</option>
+													<option value="APO4">APO4</option>
+													<option value="APO5">APO5</option>
+													<option value="APO6">APO6</option>
+													<option value="APO7">APO7</option>
+													<option value="APO8">APO8</option>
+													<option value="APO9">APO9</option>
+													<option value="APO10">APO10</option>
+													<option value="APO11">APO11</option>
+													<option value="APO12">APO12</option>
+													<option value="APO13">APO13</option>
+													<option value="DSS1">DSS1</option>
+													<option value="DSS2">DSS2</option>
+													<option value="DSS3">DSS3</option>
+													<option value="DSS4">DSS4</option>
+													<option value="DSS5">DSS5</option>
+													<option value="DSS6">DSS6</option>
+
 												</select>
 												<br>
 												<select required="true" name="aspek" class="form-control">
 													<option value="">=Pilih ASPEK=</option>
-													<option value="Efficiency">Efficiency</option>
-													<option value="Memorability">Memorability</option>
-													<option value="Error">Error</option>
-													<option value="Satisfaction">Satisfaction</option>
-													<option value="Learnabillity">Learnabillity</option>
+													<option value="DSS">DSS</option>
+													<option value="APO">APO</option>
 												</select>
 											</div>
 										</div>

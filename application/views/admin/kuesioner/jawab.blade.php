@@ -176,7 +176,7 @@ Dashboard - Administrasi
 
 
 			    $.ajax({
-						url: 		"{{base_url('superuser/soal/jawab')}}",
+						url: 		"{{base_url('superuser/soal/jawab2')}}",
 						method: 	"POST",
 						data:  		new FormData(this),
 		          		processData: false,

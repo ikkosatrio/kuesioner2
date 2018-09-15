@@ -257,12 +257,14 @@ class Superuser extends CI_Controller {
 			$soal  = $this->input->post('soal');
 			$id_kuesioner  = $this->input->post('id_kuesioner');
 			$jenis  = $this->input->post('jenis');
+            $aspek  = $this->input->post('aspek');
 
 
 			$data = array(
 				'id_kuesioner' => $id_kuesioner,
 				'soal'       => $soal,
 				'jenis'      => $jenis,
+                'aspek'      => $aspek
 			);
 
 			if($this->m_soal->input_data($data,'soal')){
@@ -276,6 +278,94 @@ class Superuser extends CI_Controller {
 			$data['responden'] = $this->m_responden->detail($where,'responden')->row();
 			echo $this->blade->nggambar('admin.responden.content',$data);
 		}
+		else if ($url=="jawab2" && $this->input->is_ajax_request() == true) {
+
+            $kuesioner = $this->input->post('kuesioner');
+            $nim       = $this->input->post('id_responden');
+
+            $data = array(
+                'id_kuesioner' => $kuesioner,
+                'id_responden'       => $nim,
+            );
+
+            $result = $this->m_jawaban->checkresponden($data,'jawaban')->num_rows();
+
+            if ($result != 0) {
+                echo goResult(false,"Responden ini telah menjawab");
+                return;
+            }
+
+            $id = $this->m_jawaban->input_data($data,'jawaban');
+
+            $soals = $this->m_responden->tampil_data('soal')->result();
+
+            $hasil        = 0;
+            $efficiency   = 0;
+            $satisfiction = 0;
+            $learnability = 0;
+            $error        = 0;
+            $memorability = 0;
+
+            $apo = 0;
+            $dss = 0;
+//            echo "asd";
+
+            $jmlSoalApo = 0;
+            $jmlSoalDss = 0;
+
+            foreach ($soals as $soal) {
+
+                if ($this->input->post('jawaban-'.$soal->id_soal)) {
+
+                    $jawaban = $this->input->post('jawaban-'.$soal->id_soal);
+                    $id_soal = $soal->id_soal;
+
+                    $arrjawab = array(
+                        'id_jawaban' => $id,
+                        'id_soal'    => $id_soal,
+                        'jawaban'    => $jawaban,
+                    );
+
+                    switch ($soal->aspek) {
+                        case 'APO':
+                            $apo = $apo + $jawaban;
+                            $jmlSoalApo++;
+                            break;
+                        case 'DSS':
+                            $dss = $dss + $jawaban;
+                            $jmlSoalDss++;
+                            break;
+                    }
+
+                    $this->m_jawaban->input_data($arrjawab,'detail_jawaban');
+
+                }
+            }
+
+            $dataid = array(
+                'id_jawaban' => $id,
+            );
+
+            $apo = $apo / $jmlSoalApo;
+            $dss   = $apo / $jmlSoalDss;
+//            $satisfiction = $satisfiction * 2.5;
+//            $learnability = $learnability * 2.5;
+//            $error        = $error * 2.5;
+//            $memorability = $memorability * 2.5;
+
+            $datajawab = array(
+                'HasilAPO' => $apo,
+                'HasilDSS' => $dss,
+            );
+
+
+
+            $this->m_jawaban->update_data($dataid,$datajawab,'jawaban');
+
+
+            echo goResult(true,"Data Telah Di Dijawab dengan Hasil $apo");
+            return;
+        }
 		else if ($url=="jawab" && $this->input->is_ajax_request() == true) {
 
 			$kuesioner = $this->input->post('kuesioner');
