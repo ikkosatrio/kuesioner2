@@ -42,7 +42,8 @@ Dashboard - Administrasi
 		                        <tr>
 		                        	<th>No</th>
 		                        	<th>Responden</th>
-		                        	<th>Hasil</th>
+		                        	<th>Hasil APO</th>
+									<th>Hasil DSS</th>
 		                            <th class="pull-right">Aksi</th>
 		                        </tr>
 		                    </thead>
@@ -55,7 +56,8 @@ Dashboard - Administrasi
 				                        		{{$result->nim}} - {{$result->nama}}
 				                        	</span>
 				                        </td>
-				                        <td align="center">{{$result->hasil}}</td>
+				                        <td align="center">{{$result->HasilAPO}}</td>
+										 <td align="center">{{$result->HasilDSS}}</td>
 				                        <td align="center">DETAIL</td>
 			                        </tr>
 			                        @endforeach
