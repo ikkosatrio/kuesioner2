@@ -347,7 +347,7 @@ class Superuser extends CI_Controller {
             );
 
             $apo = $apo / $jmlSoalApo;
-            $dss   = $apo / $jmlSoalDss;
+            $dss   = $dss / $jmlSoalDss;
 //            $satisfiction = $satisfiction * 2.5;
 //            $learnability = $learnability * 2.5;
 //            $error        = $error * 2.5;
