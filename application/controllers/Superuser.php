@@ -698,6 +698,69 @@ class Superuser extends CI_Controller {
 	// End kuesioner
 
 
+    public function hasil2($id=null){
+        $data = $this->data;
+
+        if ($id != null) {
+            $where = array(
+                'id_kuesioner' => $id,
+            );
+            $hasil = $this->m_jawaban->hasil($where,'jawaban')->row();
+            $kuesioner = $this->m_kuesioner->detail($where,'kuesioner')->row();
+
+            $apo1 = (double) $this->m_soal->getJawabanbyKuesioner($id,'APO1');
+            $apo2 = (double) $this->m_soal->getJawabanbyKuesioner($id,'APO2');
+            $apo3 = (double) $this->m_soal->getJawabanbyKuesioner($id,'APO3');
+            $apo4 = (double) $this->m_soal->getJawabanbyKuesioner($id,'APO4');
+            $apo5 = (double) $this->m_soal->getJawabanbyKuesioner($id,'APO5');
+            $apo6 = (double) $this->m_soal->getJawabanbyKuesioner($id,'APO6');
+            $apo7 = (double) $this->m_soal->getJawabanbyKuesioner($id,'APO7');
+            $apo8 = (double) $this->m_soal->getJawabanbyKuesioner($id,'APO8');
+            $apo9 = (double) $this->m_soal->getJawabanbyKuesioner($id,'APO9');
+            $apo10 = (double) $this->m_soal->getJawabanbyKuesioner($id,'APO10');
+            $apo11 = (double) $this->m_soal->getJawabanbyKuesioner($id,'APO11');
+            $apo12 = (double) $this->m_soal->getJawabanbyKuesioner($id,'APO12');
+            $apo13 = (double) $this->m_soal->getJawabanbyKuesioner($id,'APO13');
+
+            $arrHasil = array();
+            $arrHasil[] = array('Label' => 'APO1','Hasil' => $apo1);
+            $arrHasil[] = array('Label' => 'APO2','Hasil' => $apo2);
+            $arrHasil[] = array('Label' => 'APO3','Hasil' => $apo3);
+            $arrHasil[] = array('Label' => 'APO4','Hasil' => $apo4);
+            $arrHasil[] = array('Label' => 'APO5','Hasil' => $apo5);
+            $arrHasil[] = array('Label' => 'APO6','Hasil' => $apo6);
+            $arrHasil[] = array('Label' => 'APO7','Hasil' => $apo7);
+            $arrHasil[] = array('Label' => 'APO8','Hasil' => $apo8);
+            $arrHasil[] = array('Label' => 'APO9','Hasil' => $apo9);
+            $arrHasil[] = array('Label' => 'APO10','Hasil' => $apo10);
+            $arrHasil[] = array('Label' => 'APO11','Hasil' => $apo11);
+            $arrHasil[] = array('Label' => 'APO12','Hasil' => $apo12);
+            $arrHasil[] = array('Label' => 'APO13','Hasil' => $apo13);
+
+
+            $dss1 = (double) $this->m_soal->getJawabanbyKuesioner($id,'DSS1');
+            $dss2 = (double) $this->m_soal->getJawabanbyKuesioner($id,'DSS2');
+            $dss3 = (double) $this->m_soal->getJawabanbyKuesioner($id,'DSS3');
+            $dss4 = (double) $this->m_soal->getJawabanbyKuesioner($id,'DSS4');
+            $dss5 = (double) $this->m_soal->getJawabanbyKuesioner($id,'DSS5');
+            $dss6 = (double) $this->m_soal->getJawabanbyKuesioner($id,'DSS6');
+
+            $arrHasil2 = array();
+            $arrHasil2[] = array('Label' => 'DSS1','Hasil' => $dss1);
+            $arrHasil2[] = array('Label' => 'DSS2','Hasil' => $dss2);
+            $arrHasil2[] = array('Label' => 'DSS3','Hasil' => $dss3);
+            $arrHasil2[] = array('Label' => 'DSS4','Hasil' => $dss4);
+            $arrHasil2[] = array('Label' => 'DSS5','Hasil' => $dss5);
+            $arrHasil2[] = array('Label' => 'DSS6','Hasil' => $dss6);
+
+
+            echo json_encode(array(
+                'Data' => array("APO" => $arrHasil,"DSS" => $arrHasil2),
+            ));
+        }
+    }
+
+
 	// Start hasil
 	public function hasil($id=null)
 	{

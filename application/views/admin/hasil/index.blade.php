@@ -40,7 +40,14 @@ Dashboard - Administrasi
 							</div>
 						</div>
 						<div class="panel-heading">
-							<canvas id="canvas"></canvas>
+							<div class="row">
+								<div class="col-lg-6">
+									<canvas id="canvas"></canvas>
+								</div>
+								<div class="col-lg-6">
+									<canvas id="canvas2"></canvas>
+								</div>
+							</div>
 							{{-- <a href="{{base_url('superuser/kuesioner/create')}}"><button type="button" class="btn bg-teal-400 btn-labeled"><b><i class="icon-plus-circle2"></i></b> Tambah Kuesioner</button></a> --}}
 						</div>
 						<div class="panel panel-flat">
@@ -64,23 +71,34 @@ Dashboard - Administrasi
 		 	var arrLabel = [];
 		 	var arrHasil = [];
 
+             var arrLabel2 = [];
+             var arrHasil2 = [];
+
 		 	var id = $('#keyword').val();
 		 	$.ajax({
-			    url: "{{base_url('superuser/hasil/')}}"+id,
+			    url: "{{base_url('superuser/hasil2/')}}"+id,
 			    type: "POST",
 			    dataType: 'json',
 			    success: function(datas) {
 
 			    	$("#masukkan").html(datas.Masukkan);
 
-			    	var data = datas.Data;
+			    	var data = datas.Data.APO;
 			    	for (var i = 0; i < data.length; i++) {
 			    		arrLabel.push(data[i].Label);
 			    		arrHasil.push(data[i].Hasil);
 			    	}
+
+                    var data2 = datas.Data.DSS;
+                    for (var i = 0; i < data2.length; i++) {
+                        arrLabel2.push(data2[i].Label);
+                        arrHasil2.push(data2[i].Hasil);
+                    }
+
 			        console.log('Label',arrLabel);
 			        console.log('Hasil',arrHasil);
 			         var ctx = document.getElementById("canvas");
+					 var ctx2 = document.getElementById("canvas2");
 					 var config = {
 						type: 'radar',
 						data: {
@@ -108,7 +126,36 @@ Dashboard - Administrasi
 							}
 						}
 					};
-					 var myChart = new Chart(ctx,config)
+
+                    var config2 = {
+                        type: 'radar',
+                        data: {
+                            labels: arrLabel2,
+                            datasets: [{
+                                label: datas.Kuesioner,
+                                borderColor: 'rgba(255,0,0,0.3)',
+                                backgroundColor: 'rgba(255,0,0,0.3)',
+                                pointBackgroundColor: 'rgba(0,0,255,0.3)',
+                                data: arrHasil2
+                            }]
+                        },
+                        options: {
+                            title: {
+                                display: true,
+                                text: 'Kuesioner'
+                            },
+                            elements: {
+                                line: {
+                                    tension: 0.0,
+                                }
+                            },
+                            scale: {
+                                beginAtZero: true,
+                            }
+                        }
+                    };
+					 var myChart = new Chart(ctx,config);
+                    var myChart = new Chart(ctx2,config2);
 			    },
 			    error: function(rtnData) {
 			        alert('error' + rtnData);

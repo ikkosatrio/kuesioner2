@@ -29,6 +29,25 @@ class M_soal extends CI_Model {
 		return $this->db->get_where($table,$where);
 	}
 
+    function getJawabanbyKuesioner($id_kuesioner,$jenis){
+        $query = $this->db
+            ->select("AVG(jawaban) as nilai")
+            ->from("detail_jawaban")
+            ->join("jawaban","jawaban.id_jawaban=detail_jawaban.id_jawaban")
+            ->join("soal", "soal.id_soal=detail_jawaban.id_soal")
+            ->where("jawaban.id_kuesioner", $id_kuesioner)
+            ->where("jenis", $jenis)
+            ->group_by("detail_jawaban.id_soal")
+            ->get();
+
+        $nilai = 0;
+        if($query->row()){
+            $nilai = $query->row()->nilai;
+        }
+
+        return $nilai;
+    }
+
 	function countRoundSoal($id_kuesioner){
 		$query = $this->db
 		->select("ROUND(jawaban) as nilai,soal.id_soal")
