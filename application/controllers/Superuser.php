@@ -553,7 +553,7 @@ class Superuser extends CI_Controller {
 		else if ($url=="update" && $id!=null) {
 			$data['type']    = "update";
 			$where           = array('id_responden' => $id);
-			$where           = array('IDPel' => $id);
+//			$where           = array('IDPel' => $id);
 			$data['responden'] = $this->m_responden->detail($where,'responden')->row();
 			echo $this->blade->nggambar('admin.responden.content',$data);
 		}
