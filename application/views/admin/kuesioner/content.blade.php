@@ -228,16 +228,16 @@ Dashboard - Administrasi
 	<script type="text/javascript" src="{{base_url()}}assets/js/plugins/forms/styling/uniform.min.js"></script>
 	<script type="text/javascript" src="{{base_url()}}assets/js/plugins/forms/styling/switch.min.js"></script>
 	<script type="text/javascript">
-	$.fn.modal.Constructor.prototype.enforceFocus = function() {
-	  modal_this = this
-	  $(document).on('focusin.modal', function (e) {
-	    if (modal_this.$element[0] !== e.target && !modal_this.$element.has(e.target).length
-	    && !$(e.target.parentNode).hasClass('cke_dialog_ui_input_select')
-	    && !$(e.target.parentNode).hasClass('cke_dialog_ui_input_text')) {
-	      modal_this.$element.focus()
-	    }
-	  })
-	};
+	// $.fn.modal.Constructor.prototype.enforceFocus = function() {
+	//   modal_this = this
+	//   $(document).on('focusin.modal', function (e) {
+	//     if (modal_this.$element[0] !== e.target && !modal_this.$element.has(e.target).length
+	//     && !$(e.target.parentNode).hasClass('cke_dialog_ui_input_select')
+	//     && !$(e.target.parentNode).hasClass('cke_dialog_ui_input_text')) {
+	//       modal_this.$element.focus()
+	//     }
+	//   })
+	// };
 
 
 	$(".switch").bootstrapSwitch();
@@ -276,7 +276,7 @@ Dashboard - Administrasi
 	    }
 
 	    $.ajax({
-				url: 		"{{base_url('superuser/soal/created')}}",
+				url: 		$("#formSoal").attr('action'),
 				method: 	"POST",
 				data:  		new FormData(this),
           		processData: false,
@@ -294,7 +294,7 @@ Dashboard - Administrasi
 				},
 				function(){
 					if(data.auth!=false){
-						redirect("{{base_url('superuser/kuesioner/update/'.$kuesioner->id_kuesioner)}}");
+                        redirect("{{base_url('superuser/kuesioner')}}");
 						return;
 					}
 				});

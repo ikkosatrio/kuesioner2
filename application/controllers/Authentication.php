@@ -210,10 +210,10 @@ class Authentication extends CI_Controller {
 		
 	}
 
-	public function logout($type){
+	public function logout(){
 
-		switch ($type) {
-			default:
+//		switch ($type) {
+//			default:
 				if(!$this->session->userdata('auth')){
 					redirect('auth');
 					return;
@@ -221,8 +221,8 @@ class Authentication extends CI_Controller {
 
 				$this->session->sess_destroy();
 				redirect('auth');
-				break;
-		}
+//				break;
+//		}
 	}
 
 	private function validate($rules,$type){
