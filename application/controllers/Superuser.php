@@ -232,10 +232,15 @@ class Superuser extends CI_Controller {
 					return;
 				}
 
-			}else if ($url=="deleted" && $id != null && $id_kuesioner != null) {
+			}else if ($url=="deleted" && $id != null) {
+                $where           = array('id_rekomendasi' => $id);
+                if ($this->m_rekomendasi->hapus_data($where,'rekomendasi')) {
 
+                }
+                redirect('superuser/rekomendasi/lihat/?id_soal='.$soal->id_soal);
 			}else {
-				echo $this->blade->nggambar('admin.rekomendasi.index',$data);
+
+			    echo $this->blade->nggambar('admin.rekomendasi.index',$data);
 				return;
 			}
 	}
@@ -459,21 +464,22 @@ class Superuser extends CI_Controller {
 			return;
 		}
 		else if ($url=="updated" && $id!=null && $this->input->is_ajax_request() == true) {
-			$where           = array('id_responden' => $id);
+			$where           = array('id_soal' => $id);
 
-			$nama  = $this->input->post('nama');
-			$nim = $this->input->post('nim');
-			$instansi = $this->input->post('instansi');
-			$jurusan = $this->input->post('jurusan');
+            $soal  = $this->input->post('soal');
+            $id_kuesioner  = $this->input->post('id_kuesioner');
+            $jenis  = $this->input->post('jenis');
+            $aspek  = $this->input->post('aspek');
 
-			$data = array(
-				'nama'       => $nama,
-				'nim'   => $nim,
-				'instansi' => $instansi,
-				'jurusan' => $jurusan
-			);
 
-			if($this->m_responden->update_data($where,$data,'responden')){
+            $data = array(
+                'id_kuesioner' => $id_kuesioner,
+                'soal'       => $soal,
+                'jenis'      => $jenis,
+                'aspek'      => $aspek
+            );
+
+			if($this->m_responden->update_data($where,$data,'soal')){
 				echo goResult(true,"Data Telah Di Tambahkan");
 				return;
 			}

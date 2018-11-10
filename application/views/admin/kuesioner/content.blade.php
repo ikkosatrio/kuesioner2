@@ -165,7 +165,7 @@ Dashboard - Administrasi
 									<h5 class="modal-title">Form Soal</h5>
 								</div>
 
-								<form action="" class="form-horizontal" id="formSoal">
+								<form action="{{base_url('superuser/soal/created/'.$kuesioner->id_kuesioner)}}" class="form-horizontal" id="formSoal">
 									<div class="modal-body">
 										<div class="form-group">
 											<label class="control-label col-sm-3">Soal</label>
