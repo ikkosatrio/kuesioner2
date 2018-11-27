@@ -19,6 +19,7 @@ class Superuser extends CI_Controller {
 		$this->load->model('m_responden');
 		$this->load->model('m_jawaban');
 		$this->load->model('m_rekomendasi');
+        $this->load->model('m_jabatan');
 		$this->data['nkuesioner'] =  $this->m_kuesioner->tampil_data('kuesioner')->num_rows();
 		$this->data['nsoal']      =  $this->m_soal->tampil_data('soal')->num_rows();
 		$this->data['nresponden'] =  $this->m_responden->tampil_data('responden')->num_rows();
@@ -519,6 +520,7 @@ class Superuser extends CI_Controller {
 		$data             = $this->data;
 		$data['menu']     = "responden";
 		$data['responden'] = $this->m_responden->tampil_data('responden')->result();
+        $data['jabatan'] = $this->m_jabatan->tampil_data('jabatan')->result();
 
 		if ($url=="create") {
 			$data['type']			= "create";
@@ -543,12 +545,14 @@ class Superuser extends CI_Controller {
 			$nim = $this->input->post('nim');
 			$instansi = $this->input->post('instansi');
 			$jurusan = $this->input->post('jurusan');
+			$jabatan = $this->input->post('jabatan');
 
 			$data = array(
 				'nama'       => $nama,
 				'nim'   => $nim,
 				'instansi' => $instansi,
-				'jurusan' => $jurusan
+				'jurusan' => $jurusan,
+                'id_jabatan' => $jabatan
 			);
 
 			if($this->m_responden->input_data($data,'responden')){
@@ -570,12 +574,14 @@ class Superuser extends CI_Controller {
 			$nim = $this->input->post('nim');
 			$instansi = $this->input->post('instansi');
 			$jurusan = $this->input->post('jurusan');
+            $jabatan = $this->input->post('jabatan');
 
 			$data = array(
 				'nama'       => $nama,
 				'nim'   => $nim,
 				'instansi' => $instansi,
-				'jurusan' => $jurusan
+				'jurusan' => $jurusan,
+                'id_jabatan' => $jabatan
 			);
 
 			if($this->m_responden->update_data($where,$data,'responden')){
@@ -596,6 +602,70 @@ class Superuser extends CI_Controller {
 		}
 	}
 	// End responden
+
+
+    // --------------------------------- Start KAtegori
+    public function jabatan($url=null,$id=null)
+    {
+        $data             = $this->data;
+        $data['menu']     = "jabatan";
+        $data['jabatan'] = $this->m_jabatan->tampil_data('jabatan')->result();
+
+        if ($url=="create") {
+            $data['type']			= "create";
+            echo $this->blade->nggambar('admin.jabatan.content',$data);
+            return;
+        }
+        else if ($url == "created" && $this->input->is_ajax_request() == true) {
+
+            $nama     	= $this->input->post('nama');
+            $deskripsi  = $this->input->post('deskripsi');
+
+            $data = array(
+                'nama'       => $nama,
+                'deskripsi_jabatan'   => $deskripsi,
+            );
+
+            if($this->m_jabatan->input_data($data,'jabatan')){
+                echo goResult(true,"Data Telah Di Tambahkan");
+                return;
+            }
+        }
+        else if ($url=="update" && $id!=null) {
+            $data['type']    = "update";
+            $where           = array('id_jabatan' => $id);
+            $data['jabatan'] = $this->m_jabatan->detail($where,'jabatan')->row();
+            echo $this->blade->nggambar('admin.jabatan.content',$data);
+        }
+        else if ($url=="updated" && $id!=null && $this->input->is_ajax_request() == true) {
+            $where           = array('id_jabatan' => $id);
+
+            $nama     	= $this->input->post('nama');
+            $deskripsi  = $this->input->post('deskripsi');
+
+            $data = array(
+                'nama'       => $nama,
+                'deskripsi_jabatan'   => $deskripsi,
+            );
+
+            if($this->m_jabatan->update_data($where,$data,'jabatan')){
+                echo goResult(true,"Data Telah Di Tambahkan");
+                return;
+            }
+        }
+        else if ($url=="deleted" && $id != null) {
+            $where           = array('id_jabatan' => $id);
+            if ($this->m_jabatan->hapus_data($where,'jabatan')) {
+
+            }
+            redirect('superuser/jabatan/');
+        }
+        else {
+            echo $this->blade->nggambar('admin.jabatan.index',$data);
+            return;
+        }
+    }
+    // --------------------------------- End KAtegori
 
 
 	// Start kuesioner

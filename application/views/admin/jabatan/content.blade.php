@@ -20,8 +20,8 @@ Dashboard - Administrasi
 					<div class="breadcrumb-line">
 						<ul class="breadcrumb">
 							<li><a href="{{base_url('superuser')}}"><i class="icon-home2 position-left"></i> Home</a></li>
-							<li><a href="{{base_url('superuser/responden')}}">Responden</a></li>
-							<li class="active">{{ ($type=="create") ? 'Tambah Data Responden' : 'Perbarui Data Responden' }}</li>
+							<li><a href="{{base_url('superuser/jabatan')}}">Jabatan</a></li>
+							<li class="active">{{ ($type=="create") ? 'Tambah Data Jabatan' : 'Perbarui Data Jabatan' }}</li>
 						</ul>
 					</div>
 				</div>
@@ -32,7 +32,7 @@ Dashboard - Administrasi
 					<!-- Form horizontal -->
 					<div class="panel panel-flat">
 						<div class="panel-heading">
-							<h5 class="panel-title">Tambah Responden</h5>
+							<h5 class="panel-title">Tambah Jabatan</h5>
 							<div class="heading-elements">
 								<ul class="icons-list">
 			                		<li><a data-action="collapse"></a></li>
@@ -42,54 +42,24 @@ Dashboard - Administrasi
 		                	</div>
 						</div>
 						<div class="panel-body">
-						<form id="form-blog" class="form-horizontal" action="{{ ($type=='create') ? base_url('superuser/responden/created') : base_url('superuser/responden/updated/'.$responden->id_responden) }}" method="post">
+						<form id="form-blog" class="form-horizontal" action="{{ ($type=='create') ? base_url('superuser/jabatan/created') : base_url('superuser/jabatan/updated/'.$jabatan->id_jabatan) }}" method="post">
 							<div class="form-group">
-								<label class="col-lg-2 control-label">NIM/NBI/NIP <span class="text-danger"><b>*</b></span></label>
+								<label class="col-lg-2 control-label">Nama Jabatan <span class="text-danger"><b>*</b></span></label>
 								<div class="col-lg-10">
-									<input class="form-control" type="number" placeholder="NIM/NBI/NIP" name="nim" 
-									value="{{ ($type=='create') ? '' : $responden->nim }}" required>
+									<input class="form-control" type="text" placeholder="Nama Jabatan" name="nama" 
+									value="{{ ($type=='create') ? '' : $jabatan->nama }}" required>
 								</div>
 							</div>
-							<div class="form-group">
-								<label class="col-lg-2 control-label">Nama Responden <span class="text-danger"><b>*</b></span></label>
-								<div class="col-lg-10">
-									<input class="form-control" type="text" placeholder="Nama Responden" name="nama" 
-									value="{{ ($type=='create') ? '' : $responden->nama }}" required>
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-lg-2 control-label">Instansi <span class="text-danger"><b>*</b></span></label>
-								<div class="col-lg-10">
-									<input class="form-control" type="text" placeholder="Intansi" name="instansi" 
-									value="{{ ($type=='create') ? '' : $responden->instansi }}" required>
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-lg-2 control-label">Jurusan <span class="text-danger"><b>*</b></span></label>
-								<div class="col-lg-10">
-									<input class="form-control" type="text" placeholder="Jurusan" name="jurusan" 
-									value="{{ ($type=='create') ? '' : $responden->jurusan }}" required>
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-lg-2 control-label">Jabatan <span class="text-danger"><b>*</b></span></label>
-								<div class="col-lg-10">
-									<select class="select-search" name="jabatan" required>
-										<option value="">Jabatan</option>
-										@foreach($jabatan as $result)
-											@if($type=="update")
-												<option value="{{$result->id_jabatan}}" {{($result->id_jabatan==$responden->id_jabatan) ? "selected" : ""}}>{{$result->nama}}</option>
-											@else
-												<option value="{{$result->id_jabatan}}">{{$result->nama}}</option>
-											@endif
-										@endforeach
-									</select>
 
+							<div class="form-group">
+								<label class="col-lg-2 control-label">Deskripsi Jabatan <span class="text-danger"><b>*</b></span></label>
+								<div class="col-lg-10">
+									<textarea rows="10" id="editor-full" cols="100" class="wysihtml5 wysihtml5-default2 form-control"  name="deskripsi" >{!! ($type=='create') ? '' : $jabatan->deskripsi_jabatan !!}</textarea>
 								</div>
 							</div>
 						
 					<div class="text-right">
-							<button type="submit" class="btn btn-primary">{{ ($type=='create') ? 'Buat Responden' : 'Ubah Responden' }} <i class="icon-arrow-right14 position-right"></i></button>
+							<button type="submit" class="btn btn-primary">{{ ($type=='create') ? 'Buat Jabatan' : 'Ubah jabatan' }} <i class="icon-arrow-right14 position-right"></i></button>
 							@if($type=="update")
 							<a class="btn btn-danger" href="javascript:void(0)" onclick="window.history.back(); "> Batalkan <i class="fa fa-times position-right"></i></a>
 							@endif
@@ -137,19 +107,19 @@ Dashboard - Administrasi
           		processData: false,
           		contentType: false,
 				beforeSend: function(){
-					blockMessage($('#form-blog'),'Please Wait , {{ ($type =="create") ? "Menambahkan Responden" : "Memperbarui Responden" }}','#fff');		
+					blockMessage($('#form-blog'),'Please Wait , {{ ($type =="create") ? "Menambahkan Jabatan" : "Memperbarui Jabatan" }}','#fff');		
 				}
 			})
 			.done(function(data){
 				$('#form-blog').unblock();
 				sweetAlert({
-					title: 	((data.auth==false) ? "Opps!" : '{{ ($type =="create") ? "Responden Di Buatkan" : "Responden Di Perbarui" }}'),
+					title: 	((data.auth==false) ? "Opps!" : '{{ ($type =="create") ? "Jabatan Di Buatkan" : "Jabatan Di Perbarui" }}'),
 					text: 	data.msg,
 					type: 	((data.auth==false) ? "error" : "success"),
 				},
 				function(){
 					if(data.auth!=false){
-						redirect("{{base_url('superuser/responden')}}");		
+						redirect("{{base_url('superuser/jabatan')}}");		
 						return;
 					}
 				});
