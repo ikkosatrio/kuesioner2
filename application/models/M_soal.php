@@ -29,6 +29,13 @@ class M_soal extends CI_Model {
 		return $this->db->get_where($table,$where);
 	}
 
+	function tampilJabatanSoal($where,$table)
+    {
+        $this->db->join('soal','soal_jabatan.id_soal=soal.id_soal');
+        $this->db->join('jabatan','soal_jabatan.id_jabatan=jabatan.id_jabatan');
+        return $this->db->get_where($table,$where);
+    }
+
     function getJawabanbyKuesioner($id_kuesioner,$jenis){
         $query = $this->db
             ->select("AVG(jawaban) as nilai")

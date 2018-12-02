@@ -283,7 +283,8 @@
 								
 									<li class="{{match($menu,'config','active')}}"><a href="{{base_url('superuser/config')}}"><i class="icon-gear"></i> <span>Configurasi Website</span></a></li>
 									<li class="{{match($menu,'responden','active')}}"><a href="{{base_url('superuser/responden')}}"><i class="icon-users"></i> <span>Responden</span></a></li>
-									<li class="{{match($menu,'responden','active')}}"><a href="{{base_url('superuser/jabatan')}}"><i class="icon-users"></i> <span>Jabatan</span></a></li>
+									<li class="{{match($menu,'jabatan','active')}}"><a href="{{base_url('superuser/jabatan')}}"><i class="icon-users"></i> <span>Jabatan</span></a></li>
+									<li class="{{match($menu,'struktur','active')}}"><a href="{{base_url('superuser/struktur')}}"><i class="icon-users"></i> <span>Struktur</span></a></li>
 									<li class="{{match($menu,'kuesioner','active')}}"><a href="{{base_url('superuser/kuesioner')}}"><i class="icon-clipboard"></i> <span>Kuesioner</span></a></li>
 									<li class="{{match($menu,'hasil','active')}}"><a href="{{base_url('superuser/hasil')}}"><i class="icon-stats-bars"></i> <span>Hasil</span></a></li>
 							</ul>

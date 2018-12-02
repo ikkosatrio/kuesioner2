@@ -111,6 +111,7 @@ Dashboard - Administrasi
 			                        <tr>
 			                        	<th>No</th>
 			                        	<th>Soal</th>
+										{{--<th>Jabatan</th>--}}
 			                        	<th>Jenis</th>
 			                        	<th>Aspek</th>
 			                            <th class="text-center">Aksi</th>
@@ -125,6 +126,8 @@ Dashboard - Administrasi
 				                        		{{$result->soal}}
 				                        	</span>
 				                        </td>
+
+										{{--<td align="center">TEST</td>--}}
 				                        <td align="center">{{$result->jenis}}</td>
 				                        <td align="center">{{$result->aspek}}</td>
 				                        <td class="text-center">
@@ -134,6 +137,9 @@ Dashboard - Administrasi
 												<li>
 													<a href="{{base_url('superuser/rekomendasi/lihat/?id_soal='.$result->id_soal)}}">
 														<i class="fa fa-edit"></i> Rekomendasi
+													</a>
+													<a href="{{base_url('superuser/soaljabatan/?id_soal='.$result->id_soal)}}">
+														<i class="fa fa-edit"></i> Jabatan
 													</a>
 													<a href="javascript:void(0)" onclick="editIt({{$result->id_soal}})">
 														<i class="fa fa-edit"></i> Ubah Kuesioner
@@ -170,6 +176,18 @@ Dashboard - Administrasi
 										<div class="form-group">
 											<label class="control-label col-sm-3">Soal</label>
 											<div class="col-sm-9">
+												{{--<select class="select-search" name="jabatan" required>--}}
+													{{--<option value="">Jabatan</option>--}}
+													{{--@foreach($jabatan as $result)--}}
+														{{--@if($type=="updates")--}}
+															{{--<option value="{{$result->id_jabatan}}" {{($result->id_jabatan==$soal->id_jabatan) ? "selected" : ""}}>{{$result->nama}}</option>--}}
+														{{--@else--}}
+															{{--<option value="{{$result->id_jabatan}}">{{$result->nama}}</option>--}}
+														{{--@endif--}}
+													{{--@endforeach--}}
+												{{--</select>--}}
+												<br>
+												<br>
 												<input type="hidden" name="id_soal" id="id_soal" value="">
 												<input type="hidden" name="id_kuesioner" id="id_kuesioner" value="{{ $kuesioner->id_kuesioner}}">
 												<textarea required="true" placeholder="Masukkan Soal" rows="10" id="editor-full" cols="100" class="wysihtml5 isisoal wysihtml5-default2 form-control"  name="soal" ></textarea>
@@ -203,6 +221,8 @@ Dashboard - Administrasi
 													<option value="DSS">DSS</option>
 													<option value="APO">APO</option>
 												</select>
+												<br>
+
 											</div>
 										</div>
 									</div>

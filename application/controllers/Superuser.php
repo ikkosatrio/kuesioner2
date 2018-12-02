@@ -20,6 +20,7 @@ class Superuser extends CI_Controller {
 		$this->load->model('m_jawaban');
 		$this->load->model('m_rekomendasi');
         $this->load->model('m_jabatan');
+        $this->load->model('m_struktur');
 		$this->data['nkuesioner'] =  $this->m_kuesioner->tampil_data('kuesioner')->num_rows();
 		$this->data['nsoal']      =  $this->m_soal->tampil_data('soal')->num_rows();
 		$this->data['nresponden'] =  $this->m_responden->tampil_data('responden')->num_rows();
@@ -246,12 +247,62 @@ class Superuser extends CI_Controller {
 			}
 	}
 
+    public function soaljabatan($url=null,$id=null,$id_kuesioner=null)
+    {
+        $data             = $this->data;
+        $data['menu']     = "soal";
+
+        $where = array(
+            "soal_jabatan.id_soal" => $this->input->get_post('id_soal')
+        );
+        $data['soal_jabatan'] = $this->m_soal->tampilJabatanSoal($where,'soal_jabatan')->result();
+        $where2 = array(
+            "id_soal" => $this->input->get_post('id_soal')
+        );
+        $data['soal'] = $this->m_soal->tampilByKuesioner($where2,'soal')->row();
+        $data['jabatan'] = $this->m_jabatan->tampil_data('jabatan')->result();
+
+
+
+        if ($url=="create") {
+            $data['type']			= "create";
+            echo $this->blade->nggambar('admin.soaljabatan.content',$data);
+            return;
+        }
+        else if ($url == "created" && $this->input->is_ajax_request() == true) {
+
+            $id_soal     	= $this->input->post('id_soal');
+            $id_jabatan  = $this->input->post('jabatan');
+
+            $data = array(
+                'id_soal'       => $id_soal,
+                'id_jabatan'   => $id_jabatan,
+            );
+
+            if($this->m_jabatan->input_data($data,'soal_jabatan')){
+                echo goResult(true,"Data Telah Di Tambahkan");
+                return;
+            }
+        }else if ($url=="deleted" && $id != null) {
+            $where           = array('id_soal_jabatan' => $id);
+            if ($this->m_soal->hapus_data($where,'soal_jabatan')) {
+
+            }
+            redirect('superuser/soaljabatan/?id_soal='.$this->input->get_post('id_soal'));
+        }
+        else {
+            echo $this->blade->nggambar('admin.soaljabatan.index',$data);
+            return;
+        }
+    }
+
+
 	// Start soal
 	public function soal($url=null,$id=null,$id_kuesioner=null)
 	{
 		$data             = $this->data;
 		$data['menu']     = "soal";
-		$data['soal'] = $this->m_responden->tampil_data('soal')->result();
+		$data['soal'] = $this->m_soal->tampil_data('soal')->result();
 
 		if ($url=="create") {
 			$data['type']			= "create";
@@ -262,12 +313,14 @@ class Superuser extends CI_Controller {
 
 			$soal  = $this->input->post('soal');
 			$id_kuesioner  = $this->input->post('id_kuesioner');
+			$id_jabatan = $this->input->post('jabatan');
 			$jenis  = $this->input->post('jenis');
             $aspek  = $this->input->post('aspek');
 
 
 			$data = array(
 				'id_kuesioner' => $id_kuesioner,
+                'id_jabatan' => $id_jabatan,
 				'soal'       => $soal,
 				'jenis'      => $jenis,
                 'aspek'      => $aspek
@@ -469,12 +522,14 @@ class Superuser extends CI_Controller {
 
             $soal  = $this->input->post('soal');
             $id_kuesioner  = $this->input->post('id_kuesioner');
+            $id_jabatan = $this->input->post('jabatan');
             $jenis  = $this->input->post('jenis');
             $aspek  = $this->input->post('aspek');
 
 
             $data = array(
                 'id_kuesioner' => $id_kuesioner,
+                'id_jabatan' => $id_jabatan,
                 'soal'       => $soal,
                 'jenis'      => $jenis,
                 'aspek'      => $aspek
@@ -668,6 +723,100 @@ class Superuser extends CI_Controller {
     // --------------------------------- End KAtegori
 
 
+    /**
+     * @return object
+     */
+    public function getJsonStrukturLoad()
+    {
+        $arrData = array();
+        $struktur = $this->m_struktur->tampil_data('struktur')->result();
+
+        foreach ($struktur as $row){
+            $arrData[] =  array(
+                'Id' => $row->id_struktur,
+                'ParentId' =>  $row->id_parent,
+                'Name' => $row->nama,
+                'Title' => $row->nama_struktur,
+                'Image' => "http://via.placeholder.com/200"
+            );
+        }
+
+
+        echo json_encode($arrData);
+        return;
+    }
+
+    // --------------------------------- Start KAtegori
+    public function struktur($url=null,$id=null)
+    {
+        $data             = $this->data;
+        $data['menu']     = "struktur";
+        $data['struktur'] = $this->m_struktur->tampil_data('struktur')->result();
+
+
+
+        if ($url=="create") {
+            $data['type']			= "create";
+            echo $this->blade->nggambar('admin.struktur.content',$data);
+            return;
+        }
+        else if ($url == "lihat") {
+
+            echo $this->blade->nggambar('admin.struktur.lihat',$data);
+            return;
+        }
+        else if ($url == "created" && $this->input->is_ajax_request() == true) {
+
+            $nama     	= $this->input->post('nama');
+            $deskripsi  = $this->input->post('deskripsi');
+
+            $data = array(
+                'nama_struktur'       => $nama,
+                'deskripsi_struktur'   => $deskripsi,
+            );
+
+            if($this->m_struktur->input_data($data,'struktur')){
+                echo goResult(true,"Data Telah Di Tambahkan");
+                return;
+            }
+        }
+        else if ($url=="update" && $id!=null) {
+            $data['type']    = "update";
+            $where           = array('id_struktur' => $id);
+            $data['struktur'] = $this->m_struktur->detail($where,'struktur')->row();
+            echo $this->blade->nggambar('admin.struktur.content',$data);
+        }
+        else if ($url=="updated" && $id!=null && $this->input->is_ajax_request() == true) {
+            $where           = array('id_struktur' => $id);
+
+            $nama     	= $this->input->post('nama');
+            $deskripsi  = $this->input->post('deskripsi');
+
+            $data = array(
+                'nama_struktur'       => $nama,
+                'deskripsi_struktur'   => $deskripsi,
+            );
+
+            if($this->m_struktur->update_data($where,$data,'struktur')){
+                echo goResult(true,"Data Telah Di Tambahkan");
+                return;
+            }
+        }
+        else if ($url=="deleted" && $id != null) {
+            $where           = array('id_struktur' => $id);
+            if ($this->m_jabatan->hapus_data($where,'struktur')) {
+
+            }
+            redirect('superuser/struktur/');
+        }
+        else {
+            echo $this->blade->nggambar('admin.struktur.index',$data);
+            return;
+        }
+    }
+    // --------------------------------- End KAtegori
+
+
 	// Start kuesioner
 	public function kuesioner($url=null,$id=null)
 	{
@@ -705,6 +854,7 @@ class Superuser extends CI_Controller {
 			$data['type']    = "update";
 			$where           = array('id_kuesioner' => $id);
 			$data['kuesioner'] = $this->m_kuesioner->detail($where,'kuesioner')->row();
+            $data['jabatan'] = $this->m_jabatan->tampil_data('jabatan')->result();
 
 			$data['soal'] = $this->m_soal->tampilByKuesioner($where,'soal')->result();
 
