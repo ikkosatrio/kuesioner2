@@ -751,8 +751,8 @@ class Superuser extends CI_Controller {
     {
         $data             = $this->data;
         $data['menu']     = "struktur";
-        $data['struktur'] = $this->m_struktur->tampil_data('struktur')->result();
-
+        $data['strukturs'] = $this->m_struktur->tampil_data('struktur')->result();
+        $data['parent'] = $this->m_struktur->tampil_data('struktur')->result();
 
 
         if ($url=="create") {
@@ -768,11 +768,15 @@ class Superuser extends CI_Controller {
         else if ($url == "created" && $this->input->is_ajax_request() == true) {
 
             $nama     	= $this->input->post('nama');
+            $nama_struktur     	= $this->input->post('nama_struktur');
             $deskripsi  = $this->input->post('deskripsi');
+            $parent  = $this->input->post('parent');
 
             $data = array(
-                'nama_struktur'       => $nama,
+                'nama' => $nama,
+                'nama_struktur'       => $nama_struktur,
                 'deskripsi_struktur'   => $deskripsi,
+                'id_parent' => $parent,
             );
 
             if($this->m_struktur->input_data($data,'struktur')){
@@ -790,11 +794,15 @@ class Superuser extends CI_Controller {
             $where           = array('id_struktur' => $id);
 
             $nama     	= $this->input->post('nama');
+            $nama_struktur     	= $this->input->post('nama_struktur');
             $deskripsi  = $this->input->post('deskripsi');
+            $parent  = $this->input->post('parent');
 
             $data = array(
-                'nama_struktur'       => $nama,
+                'nama' => $nama,
+                'nama_struktur'       => $nama_struktur,
                 'deskripsi_struktur'   => $deskripsi,
+                'id_parent' => $parent,
             );
 
             if($this->m_struktur->update_data($where,$data,'struktur')){

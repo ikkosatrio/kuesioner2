@@ -39,6 +39,7 @@ Dashboard - Administrasi
 						</div>
 						<div class="panel-heading">
 							<a href="{{base_url('superuser/struktur/create')}}"><button type="button" class="btn bg-teal-400 btn-labeled"><b><i class="icon-plus-circle2"></i></b> Tambah Struktur</button></a>
+							<a href="{{base_url('superuser/struktur/lihat')}}"><button type="button" class="btn bg-teal-400 btn-labeled"><b><i class="icon-eye"></i></b> Lihat Bagan Struktur</button></a>
 						</div>
 						<table class="table table-striped datatable-basic table-lg table-responsive">
 		                    <thead>
@@ -50,7 +51,7 @@ Dashboard - Administrasi
 		                        </tr>
 		                    </thead>
 		                    <tbody>
-		                    	@foreach($struktur as $key => $result)
+		                    	@foreach($strukturs as $key => $result)
 		                         <tr>
 		                        	<td align="center">{{($key+1)}}</td>
 			                        <td style="width:300px;">

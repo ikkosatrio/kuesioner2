@@ -8,14 +8,37 @@ class Main extends CI_Controller {
 
 		$this->blade->sebarno('ctrl', $this);
 		$this->load->model('m_config');
-		$this->load->model('m_kuesioner');
-		$this->load->model('m_soal');
-		$this->load->model('m_user');
-		$this->load->model('m_responden');
-		$this->load->model('m_jawaban');
+        $this->load->model('m_kuesioner');
+        $this->load->model('m_soal');
+        $this->load->model('m_user');
+        $this->load->model('m_responden');
+        $this->load->model('m_jawaban');
+        $this->load->model('m_rekomendasi');
+        $this->load->model('m_jabatan');
+        $this->load->model('m_struktur');
 
-		$this->data['config'] = $this->m_config->ambil('config',1)->row();
+        $this->data['config'] = $this->m_config->ambil('config',1)->row();
 	}
+
+    public function getJsonStrukturLoad()
+    {
+        $arrData = array();
+        $struktur = $this->m_struktur->tampil_data('struktur')->result();
+
+        foreach ($struktur as $row){
+            $arrData[] =  array(
+                'Id' => $row->id_struktur,
+                'ParentId' =>  $row->id_parent,
+                'Name' => $row->nama,
+                'Title' => $row->nama_struktur,
+                'Image' => "http://via.placeholder.com/200"
+            );
+        }
+
+
+        echo json_encode($arrData);
+        return;
+    }
 
 	public function index()
 	{
@@ -26,6 +49,13 @@ class Main extends CI_Controller {
 		$data['menu']   = "home";
 		echo $this->blade->nggambar('main.login',$data);
 	}
+
+	function struktur(){
+        $data           = $this->data;
+        $data['menu']   = "struktur";
+        echo $this->blade->nggambar('main.struktur.lihat',$data);
+        return;
+    }
 
 	public function checkresponden()
 	{

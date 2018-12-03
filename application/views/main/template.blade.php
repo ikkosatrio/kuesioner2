@@ -28,17 +28,17 @@
 <body>
 
 	<!-- Main navbar -->
-	<div class="navbar navbar-inverse">
+	<div class="navbar navbar-inverse bg-indigo">
 		<div class="navbar-header">
-			{{-- <a class="navbar-brand" href="{{base_url('superuser')}}"><img src="{{base_url()}}assets/images/website/config/logo/{{$config->logo}}" alt=""></a> --}}
+			<a class="navbar-brand" href="{{base_url('superuser')}}"><img src="{{base_url()}}assets/images/website/config/logo/{{$config->logo}}" alt=""></a>
 
-			{{-- <ul class="nav navbar-nav visible-xs-block">
+			<ul class="nav navbar-nav visible-xs-block">
 				<li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a></li>
 				<li><a class="sidebar-mobile-main-toggle"><i class="icon-paragraph-justify3"></i></a></li>
-			</ul> --}}
+			</ul>
 		</div>
 
-		{{-- <div class="navbar-collapse collapse" id="navbar-mobile"> --}}
+		 <div class="navbar-collapse collapse" id="navbar-mobile">
 			<ul class="nav navbar-nav">
 				<li><a class="sidebar-control sidebar-main-toggle hidden-xs"><i class="icon-paragraph-justify3"></i></a></li>
 				{{-- <li class="dropdown">
@@ -247,7 +247,50 @@
 		<div class="page-content">
 
 			<!-- Main sidebar -->
+			<div class="sidebar sidebar-main sidebar-default">
+				<div class="sidebar-content">
 
+					<!-- User menu -->
+					<div class="sidebar-user">
+						<div class="category-content">
+							<div class="media">
+								<a href="#" class="media-left"><img src="{{img_holder('profile')}}" class="img-circle img-sm" alt=""></a>
+								<div class="media-body">
+									<span class="media-heading text-semibold">Admin{{ucwords($ctrl->session->userdata('authmember_role'))}}</span>
+									<div class="text-size-mini text-muted">
+										<i class="icon-pin text-size-small"></i> {{$ctrl->session->userdata('auth_name')}}
+									</div>
+								</div>
+
+								<div class="media-right media-middle">
+									<ul class="icons-list">
+										<li>
+											<a href="#"><i class="icon-cog3"></i></a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- /user menu -->
+
+
+					<!-- Main navigation -->
+					<div class="sidebar-category sidebar-category-visible">
+						<div class="category-content no-padding">
+							<ul class="navigation navigation-main navigation-accordion">
+
+								<!-- Main -->
+								<li class="navigation-header"><span>Main</span> <i class="icon-menu" title="Main pages"></i></li>
+								<li class="{{match($menu,'struktur','active')}}"><a href="{{base_url('main/struktur')}}"><i class="icon-users"></i> <span>Struktur</span></a></li>
+								<li class="{{match($menu,'kuesioner','active')}}"><a href="{{base_url('main/kuesioner')}}"><i class="icon-clipboard"></i> <span>Kuesioner</span></a></li>
+							</ul>
+						</div>
+					</div>
+					<!-- /main navigation -->
+
+				</div>
+			</div>
 			<!-- /main sidebar -->
 
 

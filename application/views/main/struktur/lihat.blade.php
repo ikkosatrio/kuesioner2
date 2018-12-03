@@ -1,4 +1,4 @@
-@extends('admin.template')
+@extends('main.template')
 @section('title')
 Dashboard - Administrasi
 @endsection
@@ -13,7 +13,7 @@ Dashboard - Administrasi
 
 
     <script type="text/javascript">
-        $.getJSON("http://localhost/kuesioner2/superuser/getJsonStrukturLoad", function (source) {
+        $.getJSON("{{base_url()}}main/getJsonStrukturLoad", function (source) {
             var peopleElement = document.getElementById("people");
             var orgChart = new getOrgChart(peopleElement, {
                 // theme: "helen",

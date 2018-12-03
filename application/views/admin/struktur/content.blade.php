@@ -44,10 +44,18 @@ Dashboard - Administrasi
 						<div class="panel-body">
 						<form id="form-blog" class="form-horizontal" action="{{ ($type=='create') ? base_url('superuser/struktur/created') : base_url('superuser/struktur/updated/'.$struktur->id_struktur) }}" method="post">
 							<div class="form-group">
+								<label class="col-lg-2 control-label">Nama <span class="text-danger"><b>*</b></span></label>
+								<div class="col-lg-10">
+									<input class="form-control" type="text" placeholder="Nama" name="nama"
+									value="{{ ($type=='create') ? '' : $struktur->nama }}" required>
+								</div>
+							</div>
+
+							<div class="form-group">
 								<label class="col-lg-2 control-label">Nama Struktur <span class="text-danger"><b>*</b></span></label>
 								<div class="col-lg-10">
-									<input class="form-control" type="text" placeholder="Nama Struktur" name="nama" 
-									value="{{ ($type=='create') ? '' : $struktur->nama }}" required>
+									<input class="form-control" type="text" placeholder="Nama Struktur" name="nama_struktur"
+										   value="{{ ($type=='create') ? '' : $struktur->nama_struktur }}" required>
 								</div>
 							</div>
 
@@ -55,6 +63,22 @@ Dashboard - Administrasi
 								<label class="col-lg-2 control-label">Deskripsi Struktur <span class="text-danger"><b>*</b></span></label>
 								<div class="col-lg-10">
 									<textarea rows="10" id="editor-full" cols="100" class="wysihtml5 wysihtml5-default2 form-control"  name="deskripsi" >{!! ($type=='create') ? '' : $struktur->deskripsi_struktur !!}</textarea>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-lg-2 control-label">Parent <span class="text-danger"><b>*</b></span></label>
+								<div class="col-lg-10">
+									<select class="select-search" name="parent" required>
+										<option value="">Parent</option>
+										@foreach($strukturs as $result)
+											@if($type=="update")
+												<option value="{{$result->id_struktur}}" {{($result->id_struktur==$struktur->id_parent) ? "selected" : ""}}>{{$result->nama}} - {{$result->nama_struktur}}</option>
+											@else
+												<option value="{{$result->id_struktur}}">{{$result->nama}} - {{$result->nama_struktur}}</option>
+											@endif
+										@endforeach
+									</select>
+
 								</div>
 							</div>
 						
