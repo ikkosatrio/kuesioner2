@@ -26,7 +26,7 @@
 	<!-- /core JS files -->
 
 
-	{{phpinfo()}}
+	{{--{{phpinfo()}}--}}
 
 	<!-- Theme JS files -->
 	<script type="text/javascript" src="{{base_url()}}assets/js/core/app.js"></script>
