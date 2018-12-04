@@ -256,7 +256,7 @@
 							<div class="media">
 								<a href="#" class="media-left"><img src="{{img_holder('profile')}}" class="img-circle img-sm" alt=""></a>
 								<div class="media-body">
-									<span class="media-heading text-semibold">Admin{{ucwords($ctrl->session->userdata('authmember_role'))}}</span>
+									<span class="media-heading text-semibold">{{$ctrl->session->userdata('nama')}}{{ucwords($ctrl->session->userdata('authmember_role'))}}</span>
 									<div class="text-size-mini text-muted">
 										<i class="icon-pin text-size-small"></i> {{$ctrl->session->userdata('auth_name')}}
 									</div>

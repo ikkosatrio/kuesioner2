@@ -132,9 +132,19 @@ class Main extends CI_Controller {
 		$data['menu']    = "kuesioner";
 		$where = array('id_responden' => $this->session->userdata('id'));
 		$data['user'] = $this->m_responden->detail($where,'responden')->row();
-		$where           = array('id_kuesioner' => $id);
+		$user = $data['user'];
+		$where           = array(
+		    'id_kuesioner' => $id
+        );
+
+        $where2           = array(
+            'id_kuesioner' => $id,
+            'soal_jabatan.id_jabatan' => $user->id_jabatan
+        );
+
+//		var_dump($where);
 		$data['kuesioner'] = $this->m_kuesioner->detail($where,'kuesioner')->row();
-		$data['soal'] = $this->m_soal->tampilByKuesioner($where,'soal')->result();
+		$data['soal'] = $this->m_soal->tampilByKuesioner($where2,'soal')->result();
 
 		if($this->session->userdata('IsLogin') == false){
 			redirect('main');

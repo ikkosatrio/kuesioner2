@@ -22,6 +22,7 @@ class M_soal extends CI_Model {
 	}
 
 	function tampilByKuesioner($where,$table){
+        $this->db->join('soal_jabatan','soal_jabatan.id_soal=soal.id_soal');
 		return $this->db->get_where($table,$where);
 	}
 
