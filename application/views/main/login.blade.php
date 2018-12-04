@@ -26,6 +26,8 @@
 	<!-- /core JS files -->
 
 
+	{{phpinfo()}}
+
 	<!-- Theme JS files -->
 	<script type="text/javascript" src="{{base_url()}}assets/js/core/app.js"></script>
 	<script type="text/javascript" src="{{base_url()}}assets/js/pages/components_notifications_other.js"></script>
