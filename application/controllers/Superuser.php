@@ -257,7 +257,7 @@ class Superuser extends CI_Controller {
         );
         $data['soal_jabatan'] = $this->m_soal->tampilJabatanSoal($where,'soal_jabatan')->result();
         $where2 = array(
-            "id_soal" => $this->input->get_post('id_soal')
+            "soal.id_soal" => $this->input->get_post('id_soal')
         );
         $data['soal'] = $this->m_soal->tampilByKuesioner($where2,'soal')->row();
         $data['jabatan'] = $this->m_jabatan->tampil_data('jabatan')->result();
