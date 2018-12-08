@@ -58,7 +58,23 @@ Dashboard - Administrasi
 										   value="{{ ($type=='create') ? '' : $struktur->nama_struktur }}" required>
 								</div>
 							</div>
-
+							@if ($type!='create')
+								<div class="form-group">
+									<label class="col-lg-2 control-label">Photo Lama<span class="text-danger"><b>*</b></span></label>
+									<div class="col-lg-10">
+										<img src="{{img_struktur($struktur->photo)}}" alt="" style="height: 100px">
+									</div>
+								</div>
+							@endif
+							<div class="form-group">
+								<label class="col-lg-2 control-label">Photo<span class="text-danger"><b>*</b></span></label>
+								<div class="col-lg-10">
+									<input type="file" class="file-input-custom" name="photo" accept="image/*" {{ ($type=='create') ? '' : '' }} data-show-upload="false" data-show-caption="true" data-show-preview="true">
+									<span class="help-block"> {{ ($type=='create') ? '' : '( Jangan Ubah Jika Tidak Ada Perubahan)' }}
+										Ukuran Maksimum 2MB , Hanya File Gambar gif|jpg|png|jpeg
+										</span>
+								</div>
+							</div>
 							<div class="form-group">
 								<label class="col-lg-2 control-label">Deskripsi Struktur <span class="text-danger"><b>*</b></span></label>
 								<div class="col-lg-10">
@@ -68,7 +84,7 @@ Dashboard - Administrasi
 							<div class="form-group">
 								<label class="col-lg-2 control-label">Parent <span class="text-danger"><b>*</b></span></label>
 								<div class="col-lg-10">
-									<select class="select-search" name="parent" required>
+									<select class="select-search" name="parent">
 										<option value="">Parent</option>
 										@foreach($strukturs as $result)
 											@if($type=="update")
@@ -114,7 +130,26 @@ Dashboard - Administrasi
 	<script type="text/javascript" src="{{base_url()}}assets/js/plugins/forms/styling/uniform.min.js"></script>
 	<script type="text/javascript" src="{{base_url()}}assets/js/plugins/forms/styling/switch.min.js"></script>
 	<script type="text/javascript">
-	$(".switch").bootstrapSwitch();	
+	$(".switch").bootstrapSwitch();
+
+    $(document).ready(function(){
+        $('.file-input-custom').fileinput({
+            previewFileType: 'image',
+            browseLabel: 'Select',
+            browseClass: 'btn bg-slate-700',
+            browseIcon: '<i class="icon-image2 position-left"></i> ',
+            removeLabel: 'Remove',
+            removeClass: 'btn btn-danger',
+            removeIcon: '<i class="icon-cancel-square position-left"></i> ',
+            uploadClass: 'hidden',
+            uploadIcon: '<i class="icon-file-upload position-left"></i> ',
+            layoutTemplates: {
+                caption: '<div tabindex="-1" class="form-control file-caption {class}">\n' + '<span class="icon-file-plus kv-caption-icon"></span><div class="file-caption-name"></div>\n' + '</div>'
+            },
+            initialPreview: ["<img src='{{ ($type=='create') ? img_holder() : img_struktur($struktur->photo) }}' class='file-preview-image' alt=''>",],
+            overwriteInitial: true
+        });
+    })
 
 	$("#form-blog").submit(function(e){
 			e.preventDefault();

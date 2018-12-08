@@ -21,7 +21,7 @@ Dashboard - Administrasi
                 photoFields: ["Image"],
                 linkType: "M",
                 enableEdit: false,
-                enableDetailsView: false,
+                enableDetailsView: true,
                 dataSource: source
             });
         });

@@ -257,7 +257,7 @@ class Superuser extends CI_Controller {
         );
         $data['soal_jabatan'] = $this->m_soal->tampilJabatanSoal($where,'soal_jabatan')->result();
         $where2 = array(
-            "soal.id_soal" => $this->input->get_post('id_soal')
+            "id_soal" => $this->input->get_post('id_soal')
         );
         $data['soal'] = $this->m_soal->tampilByKuesioner($where2,'soal')->row();
         $data['jabatan'] = $this->m_jabatan->tampil_data('jabatan')->result();
@@ -737,7 +737,8 @@ class Superuser extends CI_Controller {
                 'ParentId' =>  $row->id_parent,
                 'Name' => $row->nama,
                 'Title' => $row->nama_struktur,
-                'Image' => "http://via.placeholder.com/200"
+                'Description' => $row->deskripsi_struktur,
+                'Image' => ($row->photo) ? img_struktur($row->photo) : "http://via.placeholder.com/200"
             );
         }
 
@@ -772,12 +773,27 @@ class Superuser extends CI_Controller {
             $deskripsi  = $this->input->post('deskripsi');
             $parent  = $this->input->post('parent');
 
+            $photo 		= time().$_FILES['photo']['name'];
+            $photo 		= str_replace(' ', '_', $photo);
+
+
+
             $data = array(
                 'nama' => $nama,
                 'nama_struktur'       => $nama_struktur,
                 'deskripsi_struktur'   => $deskripsi,
                 'id_parent' => $parent,
             );
+
+            if (!empty($_FILES['photo']['name'])) {
+                $upload 	= $this->upload('./assets/images/struktur/','photo',$photo);
+                if($upload['auth']	== false){
+                    echo goResult(false,$upload['msg']);
+                    return;
+                }else{
+                    $data['photo'] = $photo;
+                }
+            }
 
             if($this->m_struktur->input_data($data,'struktur')){
                 echo goResult(true,"Data Telah Di Tambahkan");
@@ -798,12 +814,25 @@ class Superuser extends CI_Controller {
             $deskripsi  = $this->input->post('deskripsi');
             $parent  = $this->input->post('parent');
 
+            $photo 		= time().$_FILES['photo']['name'];
+            $photo 		= str_replace(' ', '_', $photo);
+
             $data = array(
                 'nama' => $nama,
                 'nama_struktur'       => $nama_struktur,
                 'deskripsi_struktur'   => $deskripsi,
                 'id_parent' => $parent,
             );
+
+            if (!empty($_FILES['photo']['name'])) {
+                $upload 	= $this->upload('./assets/images/struktur/','photo',$photo);
+                if($upload['auth']	== false){
+                    echo goResult(false,$upload['msg']);
+                    return;
+                }else{
+                    $data['photo'] = $photo;
+                }
+            }
 
             if($this->m_struktur->update_data($where,$data,'struktur')){
                 echo goResult(true,"Data Telah Di Tambahkan");

@@ -197,7 +197,7 @@ INSERT INTO `responden` (`id_responden`, `nim`, `nama`, `instansi`, `jurusan`, `
 	(57, '1511405076', 'Nur Asmeila S T', 'Universitas 17 Agustus 1945 Surabaya', 'Psikologi', NULL),
 	(58, '1511405184', 'Afryda', 'Universitas 17 Agustus 1945 Surabaya', 'Psikologi', NULL),
 	(59, '1461404680', 'Anang Dwi Rismawan', 'Universitas 17 Agustus 1945 Surabaya', 'Teknik Informatika', NULL),
-	(60, '1461404973', 'Ikko Satrio Yulian Dwi Rahadian', 'Universitas 17 Agustus 1945 Surabaya', 'Teknik Informatika', NULL),
+	(60, '1461404973', 'Ikko Satrio Yulian Dwi Rahadian', 'Universitas 17 Agustus 1945 Surabaya', 'Teknik Informatika', 1),
 	(61, '1461404746', 'Arga Haris', 'Universitas 17 Agustus 1945 Surabaya', 'Teknik Informatika', NULL),
 	(62, '1461404914', 'Rina Munik Aprilia K', 'Universitas 17 Agustus 1945 Surabaya', 'Teknik Informatika', NULL),
 	(63, '1461404905', 'Shokibul Kahfi', 'Universitas 17 Agustus 1945 Surabaya', 'Teknik Informatika', NULL),
@@ -575,18 +575,20 @@ CREATE TABLE IF NOT EXISTS `struktur` (
   `nama_struktur` varchar(50) DEFAULT NULL,
   `deskripsi_struktur` text,
   `id_parent` int(11) DEFAULT NULL,
+  `photo` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_struktur`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
--- Dumping data for table kuesioner2.struktur: ~5 rows (approximately)
+-- Dumping data for table kuesioner2.struktur: ~6 rows (approximately)
 /*!40000 ALTER TABLE `struktur` DISABLE KEYS */;
-INSERT INTO `struktur` (`id_struktur`, `nama`, `nama_struktur`, `deskripsi_struktur`, `id_parent`) VALUES
-	(1, 'panagt', 'Direktur', '<p>asdasdasd</p>\r\n', NULL),
-	(2, 'anak buah', 'Kabah', NULL, 1),
-	(3, 'anak buah', 'Kabag', NULL, 1),
-	(5, 'anak sayur', 'Kasubah', NULL, 2),
-	(6, 'anak sayud', 'Kasubag', NULL, 3),
-	(7, 'haloo 13', '1312313', '<p>kfskdjfskdfom</p>\r\n', 1);
+INSERT INTO `struktur` (`id_struktur`, `nama`, `nama_struktur`, `deskripsi_struktur`, `id_parent`, `photo`) VALUES
+	(1, 'panagt', 'Direktur', '<p>asdasdasd</p>\r\n', NULL, NULL),
+	(2, 'anak buah', 'Kabah', NULL, 1, NULL),
+	(3, 'anak buah', 'Kabag', NULL, 1, NULL),
+	(5, 'anak sayur', 'Kasubah', NULL, 2, NULL),
+	(6, 'anak sayud', 'Kasubag', NULL, 3, NULL),
+	(7, 'haloo 13', '1312313', '<p>kfskdjfskdfom</p>\r\n', 1, NULL),
+	(8, 'asdsd', '24234qwe', '<p>asdasd</p>\r\n', 0, '1544274861Logo-GS2.jpg');
 /*!40000 ALTER TABLE `struktur` ENABLE KEYS */;
 
 -- Dumping structure for table kuesioner2.user

@@ -258,6 +258,12 @@ if (!function_exists('img_artikel')) {
 	}
 }
 
+if (!function_exists('img_struktur')) {
+    function img_struktur($img=null){
+        return base_url().'assets/images/struktur/'.$img;
+    }
+}
+
 if (!function_exists('img_album')) {
 	function img_album($img=null){
 		return base_url().'assets/images/gallery/'.$img;
