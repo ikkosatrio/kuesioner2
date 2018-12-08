@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `config` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
--- Dumping data for table kuesioner2.config: ~0 rows (approximately)
+-- Dumping data for table kuesioner2.config: ~1 rows (approximately)
 /*!40000 ALTER TABLE `config` DISABLE KEYS */;
 INSERT INTO `config` (`id`, `name`, `email`, `phone`, `address`, `description`, `icon`, `instagram`, `facebook`, `logo`, `meta_deskripsi`, `basic`, `meta_keyword`) VALUES
 	(1, 'Sistem Informasi Kuesioner', '', '801217596251', 'Universitas 17 Agustus 1945 Surabaya', 'Diskominfo Magang<br>', 'icon1.png', '', '', 'logo4.png', '																																																																								\r\n											\r\n											\r\n											\r\n											\r\n											\r\n											', 5, '																																																																								\r\n											\r\n											\r\n											\r\n											\r\n											\r\n											');
@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `detail_jawaban` (
   PRIMARY KEY (`id_detail`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8293 DEFAULT CHARSET=latin1;
 
--- Dumping data for table kuesioner2.detail_jawaban: ~3 rows (approximately)
+-- Dumping data for table kuesioner2.detail_jawaban: ~4 rows (approximately)
 /*!40000 ALTER TABLE `detail_jawaban` DISABLE KEYS */;
 INSERT INTO `detail_jawaban` (`id_detail`, `id_jawaban`, `id_soal`, `jawaban`) VALUES
 	(8289, 426, 34, '3'),
@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `jabatan` (
   PRIMARY KEY (`id_jabatan`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
--- Dumping data for table kuesioner2.jabatan: ~0 rows (approximately)
+-- Dumping data for table kuesioner2.jabatan: ~2 rows (approximately)
 /*!40000 ALTER TABLE `jabatan` DISABLE KEYS */;
 INSERT INTO `jabatan` (`id_jabatan`, `nama`, `deskripsi_jabatan`) VALUES
 	(1, 'asdasd', '<p>asdasd</p>\r\n'),
@@ -103,7 +103,7 @@ CREATE TABLE IF NOT EXISTS `kuesioner` (
   UNIQUE KEY `kode_kuesioner` (`kode_kuesioner`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
--- Dumping data for table kuesioner2.kuesioner: ~0 rows (approximately)
+-- Dumping data for table kuesioner2.kuesioner: ~2 rows (approximately)
 /*!40000 ALTER TABLE `kuesioner` DISABLE KEYS */;
 INSERT INTO `kuesioner` (`id_kuesioner`, `kode_kuesioner`, `judul`, `skala`, `deskripsi`, `masukkan`) VALUES
 	(1, 'kuesioner1', 'Kuesioner Penelitian Pemanfaatan Metode Human Performance Model Untuk Prototyping Website (Studi Kasus: Website warta17agustus.com)', 5, '<p>Petunjuk Pengisian Kuesioner</p>\r\n\r\n<ol>\r\n	<li>Pendahuluan<br />\r\n	Kuesioner ini dibuat untuk mengetahui tingkat usabilitas pada website warta17agustus.com, jika terdapat kekurangan pada website tersebut maka akan dilakukan perancangan ulang.</li>\r\n	<li>Petunjuk Pengisian<br />\r\n	a. Isi identitas Bapak/Ibu/Saudara/i dibawah ini dengan benar<br />\r\n	b. Bukalah website warta17agustus.com<br />\r\n	c. Isilah kuesioner sesuai dengan kebenaran yang ada pada website tersebut<br />\r\n	d. Berilah tanda (V) pada kolom yang tersedia dan pilih sesuai hati nurani Anda<br />\r\n	e. Ada lima alternatif jawaban, yang menandakan skala 1-5 dengan rincian sebagai berikut:<br />\r\n	&nbsp; &nbsp;1 = Sangat Tidak Setuju<br />\r\n	&nbsp; &nbsp;2 = Tidak Setuju&nbsp;<br />\r\n	&nbsp; &nbsp;3 = Cukup Setuju<br />\r\n	&nbsp; &nbsp;4 = Setuju<br />\r\n	&nbsp; &nbsp;5 = Sangat Setuju</li>\r\n</ol>\r\n', 'Rekomendasi untuk website warta17agustus.com dengan mengacu pada hasil radar chart dan eight golden rules for web design\r\n1. Konsistensi\r\na. Pilihan Warna\r\nWebsite warta17agustus.com secara garis besar terdiri dari tiga paduan warna yakni, merah, putih, dan hitam. Tetapi terdapat dua warna yang dominan yaitu merah dan putih. Hal ini selaras dengan sebutan Universitas 17 Agustus 1945 Surabaya yakni Kampus Merah Putih. Kedua warna tersebut dijadikan sebagai warna dasar dari setiap layout halaman antarmuka pada website warta17agustus.com.\r\nb. Tata Letak\r\nTata letak pada antarmuka setiap halaman di website warta17agustus.com adalah sama. Contohnya, terdapat Logo warta17agustus serta menu-menu yang selalu berada di posisi yang sama. Tetapi, terdapat satu menu yang tidak mengarah ke halaman apapun jika di klik. Menu tersebut adalah menu TV Warta17. Hal ini disebabkan karena terdapat beberapa pihak yang keberatan jika terdapat menu TV Warta17.\r\nSelain tata letak logo dan menu-menu, hampir disetiap halaman website warta17agustus, terdapat tata letak konten yang sama. Namun pada halaman Home terdapat perbedaan tata letak. Pada menu Home juga terjadi pemborosan konten, contohnya pada website warta17agustus.com terdapat beberapa menu seperti Sorotan, Teknologi, Karya Ilmiah, dll. Sedangkan pada menu Home bagian bawah, juga terdapat menu serta berita atau artikel-artikel yang isinya sama. \r\nDari uraian diatas, dapat disimpulkan bahwa sebenarnya website warta17agustus.com memiliki konsistensi antarmuka yang baik dengan tema yang minimalis dan tidak menggunakan tampilan grafis yang rumit. Tetapi tetap ada beberapa kegagalan dalam penempatan tata letak pada website tersebut yang menyebabkan terjadinya pemborosan konten.\r\nc. Font (Tulisan)\r\nPemilihan Font atau jenis tulisan pada website warta17agustus.com adalah baik. Dengan ukuran dan warna tulisan yang disesuaikan dengan warna website membuatnya mudah dan jelas untuk dibaca oleh user.\r\n\r\n2. Shortcut\r\nWebsite warta17agustus.com menyediakan shortcut berupa menu-menu yang tertata rapi dan konsisten sehingga memudahkan user untuk berpindah halaman sesuai dengan label pada menu-menu tersebut secara cepat. Namun, pada setiap halaman, terdapat satu konten yakni Pariwara yang berisi gambar logo BSI Untag yang apabila di klik akan mengarah ke halaman error 404 Page Not Found. Selain itu, pada menu Home terdapat beberapa gambar yang menghubungkannya ke sebuah link atau url lain. Tetapi ada satu gambar “Jasa Pembuatan Website” yang mengarah ke halaman kosong.\r\n\r\n3. Feedback\r\nAksi yang dilakukan user pada website warta17agustus.com akan menghasilkan feedback atau umpan balik berupa perpindahan halaman. Contohnya jika user memberikan komentar pada sebuah berita atau artikel, ketika di klik “Kirim Komentar”, maka akan terjadi perpindahan halaman menjadi halaman Komentar.\r\n\r\n4. Dialog Closure\r\nMerancang dialog closure dianggap penting desain website. Begitu pula yang terjadi pada website warta17agustus.com. Contohnya jika user ingin membagikan satu artikel atau berita kedalam akun Facebooknya, maka user akan menekan tombol “Bagikan”, kemudian user akan menuliskan caption untuk kirimannya, dan terakhir adalah menekan tombol “Kirim ke Facebook”.\r\n\r\n5. Simple Error Handling\r\nApabila terjadi kesalahan dalam pemilihan menu, user dapat menanganinya dengan cara kembali ke halaman semula dengan menekan tombol pilihan menu semula.\r\n\r\n6. Reversible Action\r\nReversible action berguna untuk mengembalikan ke tindakan sebelumnya. Hal ini tentu akan memperkecil kekhawatiran user karena user akan mengetahui jika kesalahan yang dibuat bisa dibatalkan. Contohnya saat user ingin membagikan artikel atau berita ke dalam akun media social atau mencetak artikel dan berita, kemudian user tersebut mengurungkan niatnya, maka dapat diatas dengan menekan tombol “Cancel”.\r\n\r\n7. Internal Locus of Control\r\nUser dapat dengan mudah membuka halaman-halaman pada website warta17agustus.com sesuai dengan keinginannya, tanpa harus terurut.\r\n\r\n8. Reduce Short-term Memory Load\r\nPada poin ini, website warta17agustus.com memenuhi kualifikasi yakni dengan style minimalis dan mengurangi penggunaan tampilan yang rumit. di dukung pula dengan penataan menu yang tertata rapi sehingga memudahkan user mengingat letak menu-menu yang mendukung aksinya. \r\n'),
@@ -544,7 +544,7 @@ CREATE TABLE IF NOT EXISTS `soal` (
   PRIMARY KEY (`id_soal`)
 ) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=latin1 COMMENT='''Efficiency'',''Error'',''Satisfaction'',''Learnability'',''Memorability''';
 
--- Dumping data for table kuesioner2.soal: ~4 rows (approximately)
+-- Dumping data for table kuesioner2.soal: ~5 rows (approximately)
 /*!40000 ALTER TABLE `soal` DISABLE KEYS */;
 INSERT INTO `soal` (`id_soal`, `id_kuesioner`, `soal`, `jenis`, `aspek`, `id_jabatan`) VALUES
 	(34, 1, 'asdasdasd', 'APO1', 'APO', NULL),
@@ -562,7 +562,7 @@ CREATE TABLE IF NOT EXISTS `soal_jabatan` (
   PRIMARY KEY (`id_soal_jabatan`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- Dumping data for table kuesioner2.soal_jabatan: ~0 rows (approximately)
+-- Dumping data for table kuesioner2.soal_jabatan: ~1 rows (approximately)
 /*!40000 ALTER TABLE `soal_jabatan` DISABLE KEYS */;
 INSERT INTO `soal_jabatan` (`id_soal_jabatan`, `id_soal`, `id_jabatan`) VALUES
 	(1, 34, 1);
@@ -579,7 +579,7 @@ CREATE TABLE IF NOT EXISTS `struktur` (
   PRIMARY KEY (`id_struktur`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
--- Dumping data for table kuesioner2.struktur: ~6 rows (approximately)
+-- Dumping data for table kuesioner2.struktur: ~7 rows (approximately)
 /*!40000 ALTER TABLE `struktur` DISABLE KEYS */;
 INSERT INTO `struktur` (`id_struktur`, `nama`, `nama_struktur`, `deskripsi_struktur`, `id_parent`, `photo`) VALUES
 	(1, 'panagt', 'Direktur', '<p>asdasdasd</p>\r\n', NULL, NULL),
