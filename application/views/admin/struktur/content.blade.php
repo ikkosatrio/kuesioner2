@@ -59,12 +59,14 @@ Dashboard - Administrasi
 								</div>
 							</div>
 							@if ($type!='create')
+								@if (isset($struktur->photo))
 								<div class="form-group">
 									<label class="col-lg-2 control-label">Photo Lama<span class="text-danger"><b>*</b></span></label>
 									<div class="col-lg-10">
 										<img src="{{img_struktur($struktur->photo)}}" alt="" style="height: 100px">
 									</div>
 								</div>
+								@endif
 							@endif
 							<div class="form-group">
 								<label class="col-lg-2 control-label">Photo<span class="text-danger"><b>*</b></span></label>
