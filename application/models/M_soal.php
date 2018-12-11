@@ -22,7 +22,7 @@ class M_soal extends CI_Model {
 	}
 
 	function tampilByKuesioner($where,$table){
-        $this->db->join('soal_jabatan','soal_jabatan.id_soal=soal.id_soal');
+//        $this->db->join('kue','soal_jabatan.id_soal=soal.id_soal');
 		return $this->db->get_where($table,$where);
 	}
 
@@ -70,6 +70,7 @@ class M_soal extends CI_Model {
 
 	function input_data($data,$table){
 		$this->db->insert($table,$data);
+        return $this->db->insert_id();
 	}
 
 	function detail($where,$table){
