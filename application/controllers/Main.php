@@ -31,7 +31,7 @@ class Main extends CI_Controller {
                 'ParentId' =>  $row->id_parent,
                 'Name' => $row->nama,
                 'Title' => $row->nama_struktur,
-                'Image' => "http://via.placeholder.com/200"
+                'Image' => ($row->photo) ? img_struktur($row->photo) : "http://via.placeholder.com/200"
             );
         }
 
@@ -144,7 +144,7 @@ class Main extends CI_Controller {
 
 //		var_dump($where);
 		$data['kuesioner'] = $this->m_kuesioner->detail($where,'kuesioner')->row();
-		$data['soal'] = $this->m_soal->tampilByKuesioner($where2,'soal')->result();
+		$data['soal'] = $this->m_soal->tampilByKuesioner2($where2,'soal')->result();
 
 		if($this->session->userdata('IsLogin') == false){
 			redirect('main');
