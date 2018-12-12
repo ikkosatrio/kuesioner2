@@ -738,7 +738,7 @@ class Superuser extends CI_Controller {
                 'Name' => $row->nama,
                 'Title' => $row->nama_struktur,
                 'Description' => $row->deskripsi_struktur,
-                'Image' => ($row->photo) ? img_struktur($row->photo) : "http://via.placeholder.com/200"
+                'Image' => (isset($row->photo)) ? img_struktur($row->photo) : "http://via.placeholder.com/200"
             );
         }
 
