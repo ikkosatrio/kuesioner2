@@ -31,7 +31,7 @@ class Main extends CI_Controller {
                 'ParentId' =>  $row->id_parent,
                 'Name' => $row->nama,
                 'Title' => $row->nama_struktur,
-                'Image' => ($row->photo) ? img_struktur($row->photo) : "http://via.placeholder.com/200"
+                'Image' => (isset($row->photo)) ? img_struktur($row->photo) : "http://via.placeholder.com/200"
             );
         }
 
