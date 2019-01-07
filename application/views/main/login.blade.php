@@ -13,6 +13,8 @@
 	<link href="{{base_url()}}assets/css/core.css" rel="stylesheet" type="text/css">
 	<link href="{{base_url()}}assets/css/components.css" rel="stylesheet" type="text/css">
 	<link href="{{base_url()}}assets/css/colors.css" rel="stylesheet" type="text/css">
+	<link href="{{base_url()}}assets/js/sweetalert.min.css" rel="stylesheet" type="text/css">
+	<link href="{{base_url()}}assets/css/custom2.css" rel="stylesheet" type="text/css">
 	<!-- /global stylesheets -->
 
 	<!-- Core JS files -->
@@ -108,7 +110,17 @@
 											<i class="icon-user text-muted"></i>
 										</div> --}}
 									</div>
+									<div class="form-group has-feedback has-feedback-left">
+										{{--<label class="col-lg-2 control-label">Jabatan <span class="text-danger"><b>*</b></span></label>--}}
+											<select class="select-search form-control" name="jabatan">
+												<option value="">Jabatan</option>
+												@foreach($jabatan as $result)
+													<option value="{{$result->id_jabatan}}">{{$result->nama}}</option>
+												@endforeach
+											</select>
+									</div>
 								</div>
+
 
 								{{-- <div class="form-group has-feedback has-feedback-left">
                                     <input type="password" class="form-control" placeholder="Password" name="pass">

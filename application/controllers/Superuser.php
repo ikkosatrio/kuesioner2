@@ -22,7 +22,7 @@ class Superuser extends CI_Controller {
         $this->load->model('m_jabatan');
         $this->load->model('m_struktur');
 		$this->data['nkuesioner'] =  $this->m_kuesioner->tampil_data('kuesioner')->num_rows();
-		$this->data['nsoal']      =  $this->m_soal->tampil_data('soal')->num_rows();
+		$this->data['nsoal']      =  $this->m_soal->countAll('soal')->num_rows();
 		$this->data['nresponden'] =  $this->m_responden->tampil_data('responden')->num_rows();
 		$this->data['config'] = $this->m_config->ambil('config',1)->row();
 	}
@@ -405,8 +405,13 @@ class Superuser extends CI_Controller {
                 'id_jawaban' => $id,
             );
 
-            $apo = $apo / $jmlSoalApo;
-            $dss   = $dss / $jmlSoalDss;
+            if($apo){
+                $apo = $apo / $jmlSoalApo;
+            }
+
+            if($dss){
+                $dss   = $dss / $jmlSoalDss;
+            }
 //            $satisfiction = $satisfiction * 2.5;
 //            $learnability = $learnability * 2.5;
 //            $error        = $error * 2.5;

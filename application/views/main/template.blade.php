@@ -284,6 +284,7 @@
 								<li class="navigation-header"><span>Main</span> <i class="icon-menu" title="Main pages"></i></li>
 								<li class="{{match($menu,'struktur','active')}}"><a href="{{base_url('main/struktur')}}"><i class="icon-users"></i> <span>Struktur</span></a></li>
 								<li class="{{match($menu,'kuesioner','active')}}"><a href="{{base_url('main/kuesioner')}}"><i class="icon-clipboard"></i> <span>Kuesioner</span></a></li>
+								<li class="{{match($menu,'pendukung','active')}}"><a href="{{base_url('main/pendukung')}}"><i class="icon-book"></i> <span>Pendukung</span></a></li>
 							</ul>
 						</div>
 					</div>

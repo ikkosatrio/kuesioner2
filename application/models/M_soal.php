@@ -15,6 +15,12 @@ class M_soal extends CI_Model {
 		// return $this->db->get($table);
 	}
 
+	function countAll($table){
+        $this->db->from($table);
+        $this->db->join('kuesioner','kuesioner.id_kuesioner=soal.id_kuesioner');
+        return $query = $this->db->get();
+    }
+
 	function search($search,$table){
 	    $where = array('id_soal', $search);
 		return $this->db->get_where($table,$where);

@@ -47,6 +47,8 @@ class Main extends CI_Controller {
 		}
 		$data           = $this->data;
 		$data['menu']   = "home";
+        $data['jabatan'] = $this->m_jabatan->tampil_data('jabatan')->result();
+
 		echo $this->blade->nggambar('main.login',$data);
 	}
 
@@ -54,6 +56,17 @@ class Main extends CI_Controller {
         $data           = $this->data;
         $data['menu']   = "struktur";
         echo $this->blade->nggambar('main.struktur.lihat',$data);
+        return;
+    }
+
+    function pendukung(){
+        $data           = $this->data;
+        $data['menu']   = "pendukung";
+
+//        header('Content-type: application/pdf');
+//        header('Content-Disposition: attachment; filename="'.base_url().'assets/dokumen/Data-pendukung.pdf"');
+
+        echo $this->blade->nggambar('main.pendukung.index',$data);
         return;
     }
 
